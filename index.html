@@ -4,141 +4,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Professional Online Exam System</title>
+    <title>ammu ♥ chelloo - Online Exam System</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
+    <!-- Google Fonts: Premium Selection -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body oncontextmenu="return false;">
 
-    <div class="background-animation"></div>
+    <!-- Dynamic Animated Background -->
+    <div class="background-wrapper">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
 
     <!-- Security Overlay (For violations/warnings) -->
     <div id="security-overlay" class="overlay hidden">
-        <div class="modal warning-modal">
-            <div class="modal-icon">
+        <div class="modal warning-modal glass-card-danger">
+            <div class="modal-icon warning-icon">
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
-            <h2>Security Warning</h2>
+            <h2>Security Alert</h2>
             <p id="warning-message">You are attempting to violate exam rules.</p>
-            <p class="warning-count">Violations: <span id="violation-count">0</span>/3</p>
-            <button id="resume-btn" class="btn btn-warning">I Understand, Resume Exam</button>
+            <div class="violation-tracker">
+                <p>Violations Detected</p>
+                <div class="counter-badge"><span id="violation-count">0</span>/3</div>
+            </div>
+            <button id="resume-btn" class="btn btn-warning glow-effect">I Understand, Resume Exam</button>
         </div>
     </div>
 
     <!-- Confirm Submit Overlay -->
     <div id="submit-overlay" class="overlay hidden">
-        <div class="modal confirm-modal">
-            <div class="modal-icon">
-                <i class="fas fa-question-circle"></i>
+        <div class="modal confirm-modal glass-card">
+            <div class="modal-icon info-icon">
+                <i class="fas fa-question"></i>
             </div>
             <h2>Submit Exam?</h2>
-            <p>Are you sure you want to submit? You cannot undo this action.</p>
+            <p>Are you sure you want to finish? You cannot undo this action.</p>
             <div class="modal-actions">
                 <button id="cancel-submit-btn" class="btn btn-secondary">Cancel</button>
-                <button id="confirm-submit-btn" class="btn btn-primary">Yes, Submit</button>
+                <button id="confirm-submit-btn" class="btn btn-primary glow-effect">Yes, Submit</button>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="main-container">
         <!-- Welcome Screen -->
-        <div id="welcome-screen" class="screen active">
+        <div id="welcome-screen" class="screen active fade-in-up">
             <div class="logo-area">
-                <i class="fas fa-graduation-cap"></i>
-                <h1>Placement Assessment 2026</h1>
+                <div class="logo-text">
+                    <span class="brand-text">ammu</span>
+                    <span class="heart-icon">♥</span>
+                    <span class="brand-text">chelloo</span>
+                </div>
+                <p class="subtitle">Next-Gen Placement Assessment Platform</p>
             </div>
 
-            <div class="card intro-card">
-                <h2>Candidate Registration</h2>
+            <div class="card intro-card glass-card">
+                <h2>Candidate Login</h2>
                 <form id="registration-form">
-                    <div class="form-group">
+                    <div class="form-group floating-label">
+                        <input type="text" id="candidate-name" placeholder=" " required autocomplete="off">
                         <label for="candidate-name">Full Name</label>
-                        <input type="text" id="candidate-name" placeholder="Enter your full name" required
-                            autocomplete="off">
+                        <i class="fas fa-user input-icon"></i>
                     </div>
-                    <div class="form-group">
-                        <label for="candidate-email">Email / Candidate ID</label>
-                        <input type="text" id="candidate-email" placeholder="Enter your email or ID" required
-                            autocomplete="off">
+                    <div class="form-group floating-label">
+                        <input type="text" id="candidate-email" placeholder=" " required autocomplete="off">
+                        <label for="candidate-email">Email / ID</label>
+                        <i class="fas fa-id-card input-icon"></i>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-primary">Proceed to Instructions <i
+                    <button type="submit" class="btn btn-lg btn-primary glow-effect">Start Registration <i
                             class="fas fa-arrow-right"></i></button>
                 </form>
             </div>
         </div>
 
         <!-- Instructions Screen -->
-        <div id="instructions-screen" class="screen hidden">
-            <div class="card instructions-card">
-                <h2>Exam Instructions</h2>
-                <div class="instructions-list">
-                    <div class="instruction-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h3>Duration</h3>
-                            <p>30 Minutes total time. Auto-submit on zero.</p>
-                        </div>
+        <div id="instructions-screen" class="screen hidden fade-in-up">
+            <div class="card instructions-card glass-card">
+                <div class="card-header">
+                    <h2>Exam Guidelines</h2>
+                    <span class="badge info">Read Carefully</span>
+                </div>
+
+                <div class="instructions-grid">
+                    <div class="instruction-box">
+                        <div class="icon-box"><i class="fas fa-stopwatch"></i></div>
+                        <h3>30 Mins</h3>
+                        <p>Total Duration</p>
                     </div>
-                    <div class="instruction-item">
-                        <i class="fas fa-expand"></i>
-                        <div>
-                            <h3>Fullscreen Mode</h3>
-                            <p>The exam will run in fullscreen. Exiting is a violation.</p>
-                        </div>
+                    <div class="instruction-box">
+                        <div class="icon-box"><i class="fas fa-expand"></i></div>
+                        <h3>Fullscreen</h3>
+                        <p>Mandatory Mode</p>
                     </div>
-                    <div class="instruction-item">
-                        <i class="fas fa-eye"></i>
-                        <div>
-                            <h3>Proctoring</h3>
-                            <p>Tab switching and focus loss are monitored.</p>
-                        </div>
+                    <div class="instruction-box">
+                        <div class="icon-box"><i class="fas fa-video"></i></div>
+                        <h3>Proctored</h3>
+                        <p>AI Monitored</p>
                     </div>
-                    <div class="instruction-item">
-                        <i class="fas fa-ban"></i>
-                        <div>
-                            <h3>Restrictions</h3>
-                            <p>No right-click, copy-paste, or keyboard shortcuts.</p>
-                        </div>
+                    <div class="instruction-box">
+                        <div class="icon-box"><i class="fas fa-mouse-pointer"></i></div>
+                        <h3>No Right-Click</h3>
+                        <p>Restricted</p>
                     </div>
                 </div>
 
-                <div class="agreement">
-                    <input type="checkbox" id="agree-checkbox">
-                    <label for="agree-checkbox">I have read and understood the instructions.</label>
+                <div class="agreement-section">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="agree-checkbox">
+                        <span class="checkmark"></span>
+                        I agree to all rules and regulations.
+                    </label>
                 </div>
 
                 <div class="actions">
                     <button id="back-to-welcome-btn" class="btn btn-secondary">Back</button>
-                    <button id="start-exam-btn" class="btn btn-lg btn-success" disabled>Start Assessment</button>
+                    <button id="start-exam-btn" class="btn btn-lg btn-success glow-effect" disabled>Begin
+                        Assessment</button>
                 </div>
             </div>
         </div>
 
         <!-- Exam Screen -->
-        <div id="exam-screen" class="screen hidden">
-            <header class="exam-header">
-                <div class="timer-container" id="timer-container">
-                    <i class="fas fa-stopwatch"></i>
+        <div id="exam-screen" class="screen hidden fade-in-right">
+            <header class="exam-header glass-panel">
+                <div class="brand">
+                    <span class="brand-text-sm">ammu</span>
+                    <span class="heart-icon-sm">♥</span>
+                    <span class="brand-text-sm">chelloo</span>
+                </div>
+
+                <div class="timer-wrapper" id="timer-wrapper">
+                    <div class="timer-icon"><i class="fas fa-clock"></i></div>
                     <span id="time-display">30:00</span>
                 </div>
-                <div class="progress-info">
-                    <div class="progress-text">
-                        <span id="current-question-num">1</span> / <span id="total-questions-num">10</span>
+
+                <div class="progress-wrapper">
+                    <div class="progress-details">
+                        <span>Progress</span>
+                        <span class="progress-count"><span id="current-question-num">1</span>/<span
+                                id="total-questions-num">10</span></span>
                     </div>
-                    <div class="progress-bar-bg">
-                        <div id="exam-progress-bar" class="progress-bar-fill"></div>
+                    <div class="progress-track">
+                        <div id="exam-progress-bar" class="progress-fill"></div>
                     </div>
                 </div>
             </header>
 
-            <div class="card question-card">
-                <div class="question-header">
-                    <span class="q-badge">Question <span id="q-number">1</span></span>
-                    <!-- <span class="q-points">1 Point</span> -->
+            <div class="card question-card glass-card">
+                <div class="question-meta">
+                    <span class="q-tag">Question <span id="q-number">1</span></span>
+                    <span class="q-difficulty">High Priority</span>
                 </div>
                 <h2 id="question-text" class="question-text">Loading question...</h2>
 
@@ -148,73 +172,74 @@
             </div>
 
             <footer class="exam-footer">
-                <button id="submit-exam-btn" class="btn btn-danger">Finish Exam</button>
+                <button id="submit-exam-btn" class="btn btn-danger glow-effect-red">Finish Exam</button>
                 <div class="nav-buttons">
-                    <!-- <button id="prev-btn" class="btn btn-secondary" disabled>Previous</button> -->
-                    <button id="next-btn" class="btn btn-primary" disabled>Next Question <i
+                    <button id="next-btn" class="btn btn-primary glow-effect" disabled>Next Question <i
                             class="fas fa-chevron-right"></i></button>
                 </div>
             </footer>
         </div>
 
         <!-- Result Screen -->
-        <div id="result-screen" class="screen hidden">
-            <div class="card result-card">
+        <div id="result-screen" class="screen hidden fade-in-up">
+            <div class="card result-card glass-card">
                 <div class="result-header">
-                    <div class="profile-info">
-                        <div class="avatar"><i class="fas fa-user"></i></div>
-                        <div>
-                            <h3 id="result-name">Candidate Name</h3>
-                            <p id="result-id">ID: 12345</p>
-                        </div>
+                    <div class="candidate-avatar">
+                        <i class="fas fa-user-astronaut"></i>
                     </div>
-                    <div id="status-badge" class="status-badge pass">PASSED</div>
+                    <div class="candidate-info">
+                        <h3 id="result-name">Candidate Name</h3>
+                        <p id="result-id">ID: 12345</p>
+                    </div>
+                    <div id="status-badge" class="status-pill">PASSED</div>
                 </div>
 
-                <div class="score-display">
-                    <div class="score-circle-container">
-                        <svg class="progress-ring" width="120" height="120">
-                            <circle class="progress-ring__circle-bg" stroke="#e6e6e6" stroke-width="8"
-                                fill="transparent" r="52" cx="60" cy="60" />
-                            <circle class="progress-ring__circle" stroke="#4caf50" stroke-width="8" fill="transparent"
-                                r="52" cx="60" cy="60" />
+                <div class="score-visualization">
+                    <div class="circular-chart">
+                        <svg viewBox="0 0 36 36" class="circular-chart-svg">
+                            <path class="circle-bg" stroke-dasharray="100, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" stroke-dasharray="0, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                         </svg>
-                        <div class="score-text">
-                            <span id="result-percentage">80%</span>
-                        </div>
-                    </div>
-                    <div class="score-details">
-                        <div class="detail-item">
-                            <span class="label">Score</span>
-                            <span class="value" id="result-score">8/10</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="label">Time Taken</span>
-                            <span class="value" id="time-taken">12:30</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="label">Violations</span>
-                            <span class="value warning" id="violation-report">0</span>
+                        <div class="percentage-text">
+                            <span id="result-percentage">0%</span>
+                            <small>Score</small>
                         </div>
                     </div>
                 </div>
 
-                <div class="stats-row">
-                    <div class="stat-box correct">
-                        <i class="fas fa-check"></i>
-                        <span id="correct-count">8</span>
-                        <small>Correct</small>
+                <div class="result-stats">
+                    <div class="stat-card">
+                        <span class="label">Total Score</span>
+                        <span class="value" id="result-score">0/10</span>
                     </div>
-                    <div class="stat-box wrong">
+                    <div class="stat-card">
+                        <span class="label">Time Taken</span>
+                        <span class="value" id="time-taken">0m 0s</span>
+                    </div>
+                    <div class="stat-card warning">
+                        <span class="label">Violations</span>
+                        <span class="value" id="violation-report">0</span>
+                    </div>
+                </div>
+
+                <div class="answer-breakdown">
+                    <div class="breakdown-item correct">
+                        <i class="fas fa-check"></i>
+                        <span id="correct-count">0</span>
+                        <span>Correct</span>
+                    </div>
+                    <div class="breakdown-item wrong">
                         <i class="fas fa-times"></i>
-                        <span id="wrong-count">2</span>
-                        <small>Wrong</small>
+                        <span id="wrong-count">0</span>
+                        <span>Incorrect</span>
                     </div>
                 </div>
 
                 <div class="result-actions">
-                    <p class="final-msg">Please close this window or contact the administrator.</p>
-                    <button class="btn btn-secondary" onclick="window.close()">Close Window</button>
+                    <button class="btn btn-secondary btn-block" onclick="window.close()">Close Application</button>
+                    <p class="footer-note">Report generated automatically by ammu ♥ chelloo AI</p>
                 </div>
             </div>
         </div>

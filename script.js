@@ -281,7 +281,7 @@ function updateTimerDisplay() {
     elements.timeDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
     if (state.timeLeft < 300) { // Less than 5 mins
-        document.getElementById('timer-container').classList.add('warning');
+        document.getElementById('timer-wrapper').classList.add('warning');
     }
 }
 
@@ -329,11 +329,9 @@ function calculateResults() {
     statusBadge.innerText = passed ? 'PASSED' : 'FAILED';
     statusBadge.className = `status-badge ${passed ? 'pass' : 'fail'}`;
 
-    const scoreCircle = document.querySelector('.progress-ring__circle');
-    const radius = scoreCircle.r.baseVal.value;
-    const circumference = radius * 2 * Math.PI;
-    const offset = circumference - (percentage / 100) * circumference;
-    scoreCircle.style.strokeDashoffset = offset;
+    const scoreCircle = document.querySelector('.circle');
+    // Using stroke-dasharray for the new SVG structure: "percentage, 100"
+    scoreCircle.style.strokeDasharray = `${percentage}, 100`;
     scoreCircle.style.stroke = passed ? '#10b981' : '#ef4444';
 }
 
@@ -433,4 +431,5 @@ function loadState() {
 }
 
 // Start
-init();
+// Start
+document.addEventListener('DOMContentLoaded', init);

@@ -122,14 +122,21 @@ let state = {
 
 // --- Initialization ---
 function init() {
-    loadState();
-    setupEventListeners();
+    try {
+        loadState();
+        setupEventListeners();
 
-    if (state.isExamActive) {
-        showScreen('exam');
-        startExamFlow(true); // Resume
-    } else {
-        showScreen('welcome');
+        if (state.isExamActive) {
+            showScreen('exam');
+            startExamFlow(true); // Resume
+        } else {
+            showScreen('welcome');
+        }
+    } catch (error) {
+        console.error("Critical initialization error:", error);
+        alert("System encountered a critical error. Resetting application.");
+        localStorage.removeItem(CONFIG.localStorageKey);
+        location.reload();
     }
 }
 
@@ -420,13 +427,21 @@ function saveState() {
 }
 
 function loadState() {
-    const saved = localStorage.getItem(CONFIG.localStorageKey);
-    if (saved) {
-        const parsed = JSON.parse(saved);
-        // Only restore if exam is active or was active recently
-        if (parsed.isExamActive) {
-            state = parsed;
+    try {
+        const saved = localStorage.getItem(CONFIG.localStorageKey);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            // Validate essential state properties
+            if (parsed && parsed.isExamActive && Array.isArray(parsed.questions) && parsed.questions.length > 0) {
+                state = parsed;
+            } else {
+                console.warn('Invalid or corrupted state found in localStorage. Resetting.');
+                localStorage.removeItem(CONFIG.localStorageKey);
+            }
         }
+    } catch (e) {
+        console.error('Error loading state:', e);
+        localStorage.removeItem(CONFIG.localStorageKey);
     }
 }
 
